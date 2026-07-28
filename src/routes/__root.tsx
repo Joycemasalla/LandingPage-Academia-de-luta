@@ -81,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Método híbrido de musculação e artes marciais em Alphaville. Emagreça, ganhe disciplina e aprenda a se defender com Julio Quirino." },
       { name: "author", content: "Julio Quirino" },
       { property: "og:title", content: "Julio Quirino — Personal Fight Coach em Alphaville" },
-      { property: "og:description", content: "Musculação + Muay Thai, Boxe e MMA. Acompanhamento presencial de elite em Alphaville." },
+      { property: "og:description", content: "Método híbrido de musculação e artes marciais em Alphaville. Emagreça, ganhe disciplina e aprenda a se defender com Julio Quirino." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Julio Quirino — Personal Fight Coach em Alphaville" },
+      { name: "twitter:description", content: "Método híbrido de musculação e artes marciais em Alphaville. Emagreça, ganhe disciplina e aprenda a se defender com Julio Quirino." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9cc25282-76a5-4da2-b7b7-aece92990d8b/id-preview-6059a88c--7e1249df-9115-474a-9e48-b27782c334cc.lovable.app-1785239740793.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9cc25282-76a5-4da2-b7b7-aece92990d8b/id-preview-6059a88c--7e1249df-9115-474a-9e48-b27782c334cc.lovable.app-1785239740793.png" },
     ],
     links: [
       {
