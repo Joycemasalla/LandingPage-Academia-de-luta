@@ -1408,6 +1408,53 @@ function WhatsAppFab() {
   );
 }
 
+// ─── Botão Voltar ao Topo ─────────────────────────────────────────────────────
+function ScrollToTopFab() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 600) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      aria-label="Voltar ao topo"
+      className={`fixed bottom-24 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur border border-border shadow-lg transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary md:h-12 md:w-12 md:bottom-28 md:right-8 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2}
+        stroke="currentColor"
+        className="h-5 w-5 md:h-6 md:w-6"
+        aria-hidden="true"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+      </svg>
+    </button>
+  );
+}
+
 // ─── Page ──────────────────────────────────────────────────────────────────────
 function Index() {
   useSectionAnimation();
@@ -1429,6 +1476,7 @@ function Index() {
       </main>
       <Footer />
       <WhatsAppFab />
+      <ScrollToTopFab />
     </div>
   );
 }

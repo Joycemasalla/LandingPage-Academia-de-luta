@@ -1,0 +1,21 @@
+{
+  "name": "Julio Quirino — Personal Trainer & CT Team Quirino",
+  "short_name": "Julio Quirino",
+  "description": "Personal Fight Coach e Head Coach do CT Team Quirino em Alphaville. Treino particular híbrido ou turmas de Muay Thai, Boxe, MMA e Jiu-Jitsu.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#e11d48",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
