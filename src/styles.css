@@ -19,9 +19,9 @@
  * The :root and .dark blocks define the actual color values using oklch.
  * All colors MUST use oklch format.
  *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Paleta: 1 neutro dominante (preto/cinza escuro) + 1 cor de marca (vermelho) + 1 cor de ação.
+ * REGRA: Nenhuma cor nova foi adicionada. Diferenciação dos cards de oferta
+ * é feita via opacidade/intensidade dos tokens existentes.
  */
 
 @theme inline {
@@ -106,6 +106,7 @@
   --gradient-hero: radial-gradient(ellipse at 70% 40%, oklch(0.35 0.15 25 / 0.55), transparent 60%),
                    linear-gradient(180deg, oklch(0.11 0.01 20), oklch(0.16 0.015 20));
   --shadow-glow: 0 20px 60px -20px oklch(0.58 0.22 25 / 0.5);
+  --shadow-glow-strong: 0 0 40px -8px oklch(0.58 0.22 25 / 0.7);
   --shadow-frame: 0 30px 80px -30px oklch(0 0 0 / 0.7);
 }
 
@@ -161,8 +162,16 @@
     background: var(--primary);
     color: var(--primary-foreground);
   }
+
+  /* Foco visível em todos os elementos interativos — acessibilidade */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
+/* ─── Utilitários tipográficos ─── */
 @utility text-display {
   font-family: var(--font-display);
   letter-spacing: 0.005em;
@@ -173,30 +182,128 @@
   font-style: italic;
   line-height: 0.95;
 }
+
+/* ─── Utilitários de fundo ─── */
 @utility bg-hero {
   background-image: var(--gradient-hero);
 }
+
+/* ─── Sombras ─── */
 @utility shadow-glow {
   box-shadow: var(--shadow-glow);
+}
+@utility shadow-glow-strong {
+  box-shadow: var(--shadow-glow-strong);
 }
 @utility shadow-frame {
   box-shadow: var(--shadow-frame);
 }
-@utility corner-frame {
-  position: relative;
-}
+
+/* ─── Marquee ─── */
 @utility marquee-track {
   animation: marquee 40s linear infinite;
 }
 
+/* ─── Animações de entrada (fade + rise) ─── */
+@utility animate-fade-rise {
+  animation: fade-rise 0.6s ease forwards;
+  opacity: 0;
+}
+
+/* ─── Reveal por palavra no heading ─── */
+.word-reveal span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fade-rise 0.55s ease forwards;
+}
+
+/* Delays escalonados para as palavras */
+.word-reveal span:nth-child(1)  { animation-delay: 0.05s; }
+.word-reveal span:nth-child(2)  { animation-delay: 0.12s; }
+.word-reveal span:nth-child(3)  { animation-delay: 0.19s; }
+.word-reveal span:nth-child(4)  { animation-delay: 0.26s; }
+.word-reveal span:nth-child(5)  { animation-delay: 0.33s; }
+.word-reveal span:nth-child(6)  { animation-delay: 0.40s; }
+.word-reveal span:nth-child(7)  { animation-delay: 0.47s; }
+.word-reveal span:nth-child(8)  { animation-delay: 0.54s; }
+.word-reveal span:nth-child(9)  { animation-delay: 0.61s; }
+.word-reveal span:nth-child(10) { animation-delay: 0.68s; }
+
+/* ─── Seções animadas na entrada do viewport ─── */
+.section-animate {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.section-animate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Keyframes ─── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes pulse-red {
   0%, 100% { box-shadow: 0 0 0 0 oklch(0.58 0.22 25 / 0.6); }
   50% { box-shadow: 0 0 0 12px oklch(0.58 0.22 25 / 0); }
 }
+
+@keyframes fab-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ─── Utilitários de animação ─── */
 .pulse-dot {
   animation: pulse-red 2s infinite;
+}
+.fab-animate {
+  animation: fab-bounce 2.5s ease-in-out infinite;
+}
+
+/* ─── prefers-reduced-motion: desativa TODAS as animações ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .word-reveal span,
+  .animate-fade-rise,
+  .section-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .marquee-track {
+    animation: none !important;
+  }
+
+  .pulse-dot {
+    animation: none !important;
+  }
+
+  .fab-animate {
+    animation: none !important;
+  }
 }
