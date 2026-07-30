@@ -434,7 +434,7 @@ function Autoridade() {
               <img
                 src={julioCorner}
                 alt="Julio Quirino no corner entre rounds durante luta profissional de Muay Thai"
-                className="h-full w-full object-cover object-center"
+                className="h-full w-full object-cover object-top"
                 loading="lazy"
                 width={560}
                 height={245}
@@ -906,7 +906,7 @@ function Modalidades() {
             <img
               src={julioChuteRingue}
               alt="Julio Quirino aplicando chute alto em luta profissional de Muay Thai no ringue"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-top"
               loading="lazy"
               width={640}
               height={480}
@@ -1477,6 +1477,13 @@ function Index() {
       <Footer />
       <WhatsAppFab />
       <ScrollToTopFab />
+      
+      {/* Marca d'água de desenvolvimento fixa e discreta */}
+      <div className="fixed bottom-6 left-6 z-40 select-none pointer-events-none opacity-20 md:opacity-30">
+        <span className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-muted-foreground/70 font-medium">
+          Desenvolvido por Joyce Masalla
+        </span>
+      </div>
     </div>
   );
 }
